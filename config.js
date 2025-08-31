@@ -1,5 +1,5 @@
-const JWT_ADMIN_PASSWORD = "deepu1"
-const JWT_USER_PASSWORD = "deepu"
+const JWT_ADMIN_PASSWORD = "123456"
+const JWT_USER_PASSWORD = "654123"
 
 
 module.exports ={
