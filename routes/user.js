@@ -3,6 +3,8 @@ const {userModel} = require("../db");
 const jwt = require("jsonwebtoken");
 const userRouter = Router();
 const{JWT_USER_PASSWORD}= require("../config");
+const { userMiddleware } = require("../middleware/user");
+const user = require("../middleware/user");
 
     userRouter.post("/signup", async (req,res) =>{
         const {email, password, firstName, lastName} = req.body;   //adding zod validateion
@@ -43,7 +45,13 @@ const{JWT_USER_PASSWORD}= require("../config");
             })
         }
     })
-    userRouter.post("/purchase", (req,res) =>{
+    userRouter.post("/purchase",userMiddleware, async (req,res) =>{
+        const userId = req.userId;
+
+        await purchaseModel.find({
+
+            userId:userId
+        })
         res.json({
             message: "Course purchased successfully"
         })
